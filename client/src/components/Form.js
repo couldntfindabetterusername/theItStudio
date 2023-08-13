@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUsers, postUsers } from "../actions";
 import { useNavigate } from "react-router-dom";
 
+import "../styles.css";
+
 const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   const user = useSelector((state) =>
-    currentId ? state.find((p) => p._id === currentId) : null
+    currentId.length > 0 ? state.find((p) => p._id === currentId) : null
   );
 
   useEffect(() => {
@@ -23,29 +25,38 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(1234);
+
     if (currentId) {
       dispatch(updateUsers(currentId, userData));
     } else {
       dispatch(postUsers(userData));
     }
 
-    navigate("/");
-    // setCurrentId(null);
-    // setUserData({
-    //   name: "",
-    //   phone: "",
-    //   email: "",
-    //   hobbies: "",
-    // });
-    // console.log(currentId);
+    clear();
   };
+
+  const clear = () => {
+    setCurrentId("");
+    setUserData({
+      name: "",
+      phone: "",
+      email: "",
+      hobbies: "",
+    });
+
+    navigate("/");
+  };
+
   return (
     <div className="modal">
       <div className="form-container">
+        <span className="close-btn" onClick={() => clear()}>
+          {" "}
+          & times;{" "}
+        </span>{" "}
         <form className="form" onSubmit={handleSubmit}>
           <div className="input-field">
-            <label for="name">Name</label>
+            <label for="name"> Name </label>{" "}
             <input
               type="text"
               id="name"
@@ -55,11 +66,10 @@ const Form = ({ currentId, setCurrentId }) => {
               onChange={(e) =>
                 setUserData({ ...userData, name: e.target.value })
               }
-            ></input>
-          </div>
-
+            ></input>{" "}
+          </div>{" "}
           <div className="input-field">
-            <label for="phone">Phone</label>
+            <label for="phone"> Phone </label>{" "}
             <input
               type="number"
               id="phone"
@@ -69,11 +79,10 @@ const Form = ({ currentId, setCurrentId }) => {
               onChange={(e) =>
                 setUserData({ ...userData, phone: e.target.value })
               }
-            ></input>
-          </div>
-
+            ></input>{" "}
+          </div>{" "}
           <div className="input-field">
-            <label for="email">Email</label>
+            <label for="email"> Email </label>{" "}
             <input
               type="email"
               id="email"
@@ -83,11 +92,10 @@ const Form = ({ currentId, setCurrentId }) => {
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
-            ></input>
-          </div>
-
+            ></input>{" "}
+          </div>{" "}
           <div className="input-field">
-            <label for="hobbies">Hobbies</label>
+            <label for="hobbies"> Hobbies </label>{" "}
             <input
               type="text"
               id="hobbies"
@@ -97,14 +105,13 @@ const Form = ({ currentId, setCurrentId }) => {
               onChange={(e) =>
                 setUserData({ ...userData, hobbies: e.target.value })
               }
-            ></input>
-          </div>
-
+            ></input>{" "}
+          </div>{" "}
           <button className="submit-btn" type="submit">
-            Submit
-          </button>
-        </form>
-      </div>
+            Submit{" "}
+          </button>{" "}
+        </form>{" "}
+      </div>{" "}
     </div>
   );
 };

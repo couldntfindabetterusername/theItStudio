@@ -42,7 +42,8 @@ export const deleteUsers = (id) => async (dispatch) => {
 
 export const sendUsers = (ids) => async (dispatch) => {
   try {
-    await API.post("/send", ids);
+    console.log(4657687);
+    await API.post("/send", { ids: ids });
   } catch (error) {
     console.log(error.message);
   }

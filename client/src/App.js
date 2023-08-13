@@ -7,29 +7,35 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import "./styles.css";
+
 function App() {
   const [loading, setLoading] = useState(true);
 
-  const [currentId, setCurrentId] = useState(null);
+  const [currentId, setCurrentId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [currentId, dispatch]);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <Header setCurrentId={setCurrentId} />
-      <Table setCurrentId={setCurrentId} />
-      <Routes>
-        <Route
-          path="/form"
-          exact
-          element={
-            <Form currentId={currentId} setCurrentId={setCurrentId}></Form>
-          }
-        />
-      </Routes>
+      <main>
+        <Header setCurrentId={setCurrentId} />{" "}
+        <Table currentId={currentId} setCurrentId={setCurrentId} />{" "}
+        <Routes>
+          <Route
+            path="/form"
+            exact
+            element={
+              <Form currentId={currentId} setCurrentId={setCurrentId}>
+                {" "}
+              </Form>
+            }
+          />{" "}
+        </Routes>{" "}
+      </main>{" "}
     </BrowserRouter>
   );
 }
