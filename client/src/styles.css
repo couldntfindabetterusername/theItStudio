@@ -162,7 +162,7 @@ tr {
 }
 
 input[type=text],
-input[type=number],
+input[type=tel],
 input[type=email] {
     width: 300px;
     padding: 10px;

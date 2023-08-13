@@ -71,7 +71,8 @@ const Form = ({ currentId, setCurrentId }) => {
           <div className="input-field">
             <label for="phone"> Phone </label>{" "}
             <input
-              type="number"
+              type="tel"
+              pattern="[0-9]{10}"
               id="phone"
               name="phone"
               placeholder="Your phone"

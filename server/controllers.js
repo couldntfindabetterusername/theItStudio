@@ -63,7 +63,11 @@ export const sendEmail = async (req, res) => {
 
   let htmlContent = "";
   users.map((user) => {
-    htmlContent += user.name + " ";
+    htmlContent += "Name: " + user.name + "\n";
+    htmlContent += "Phone: " + user.phone + "\n";
+    htmlContent += "Email: " + user.email + "\n";
+    htmlContent += "Hobbies: " + user.hobbies + "\n";
+    htmlContent += "\n";
   });
 
   const transporter = nodemailer.createTransport({
